@@ -16,7 +16,7 @@ import { fetchProducts } from '@app/providers/store/reducers/ProductsSlice';
 // import types
 import { ProductType } from '@entities/productItem';
 import { FilterType } from '@features/filterProducts';
-import {useNotification} from "@shared/lib/hooks/useNotification.ts";
+import { useNotification } from '@shared/lib/hooks/useNotification.ts';
 
 const ProductsPage = () => {
     const { items, loading, error } = useAppSelector((state) => state.products);
@@ -25,7 +25,7 @@ const ProductsPage = () => {
 
     useEffect(() => {
         dispatch(fetchProducts());
-    }, []);
+    });
 
     // states
     const [filter, setFilter] = useState<FilterType>({
@@ -94,12 +94,14 @@ const ProductsPage = () => {
                     />
                 </>
             )}
-            {isModalOpen && <QuickViewModal
-                isOpen={isModalOpen}
-                product={selectedProduct}
-                onClose={closeQuickView}
-                onAddToCart={handleAdd}
-            />}
+            {isModalOpen && (
+                <QuickViewModal
+                    isOpen={isModalOpen}
+                    product={selectedProduct}
+                    onClose={closeQuickView}
+                    onAddToCart={handleAdd}
+                />
+            )}
         </div>
     );
 };
